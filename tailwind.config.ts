@@ -1,7 +1,6 @@
 import { type Config } from "tailwindcss";
 import d from "tailwindcss/defaultTheme";
 
-
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -14,5 +13,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 } satisfies Config;

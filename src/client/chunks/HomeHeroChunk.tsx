@@ -19,11 +19,11 @@ function useHomeHeroChunk() {
 
 function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
   return (
-    <section className="relative min-h-[500px] pb-32 pt-14 text-white">
+    <section className="relative min-h-[500px] pb-16 pt-14 text-white md:pb-32">
       <img
         src={IM_HoriDivider.default.src}
         alt=""
-        className="absolute bottom-0 z-[1] h-auto w-full"
+        className="absolute bottom-0 z-[1] h-[6px] w-full object-cover"
       />
       <Image
         src={IM_HeroBackground}
@@ -34,9 +34,13 @@ function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
       <div className="relative z-[1] mx-auto w-11/12 max-w-[1400px]">
         <header className="flex items-center justify-between">
           <Link href={"/"} className="flex-shrink-0">
-            <Image src={IM_HeroLogo} alt="sacin.org.ng" className="w-[300px]" />
+            <Image
+              src={IM_HeroLogo}
+              alt="sacin.org.ng"
+              className="w-[50%] md:w-[300px]"
+            />
           </Link>
-          <nav>
+          <nav className="hidden md:block">
             <ul className="flex items-center gap-10">
               {props.navigationItems.map((item) => (
                 <li key={item.id} className="font-semibold">
@@ -47,8 +51,8 @@ function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
           </nav>
         </header>
 
-        <div className="mt-32">
-          <h1 className="max-w-5xl font-clash text-6xl font-bold capitalize leading-normal">
+        <div className="mt-24 md:mt-32">
+          <h1 className="max-w-5xl font-clash text-4xl font-bold capitalize leading-normal xl:text-6xl">
             promoting the science and technology of control systems in all its
             ramifications
           </h1>

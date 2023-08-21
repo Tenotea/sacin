@@ -6,12 +6,53 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+enum FirstOrderContentType {
+    EVENT
+    ARTICLE
+    RESEARCH
+}
+
+enum Month {
+    JAN
+    FEB
+    MAR
+    APR
+    MAY
+    JUN
+    JUL
+    AUG
+    SEP
+    OCT
+    NOV
+    DEC
+}
+
+model Content {
+    id          String                @id @default(cuid())
+    slug        String                @unique
+    title       String
+    contentType FirstOrderContentType
+    description String
+    contentData String
+    updatedAt   DateTime              @updatedAt
+    createdAt   DateTime              @default(now())
+}
+
+model Event {
+    id String @id @default(cuid())
+
+    title       String
+    description String
+    startsAt    String
+    endsAt      String
+    location    String
+    month       Month
+    day         String
+    year        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }

@@ -20,7 +20,7 @@ export class HomeArticlesChunk {
             <Link href="/activities">View All</Link>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-5">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {props.articles.map((ar) => (
               <div key={ar.id} className="relative border px-8 py-14">
                 <img

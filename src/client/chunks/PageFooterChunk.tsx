@@ -1,19 +1,29 @@
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { IM_HeroLogo } from "../assets/images";
+import React from "react";
 
-export class PageFooterChunk {
-  static Default() {
+export namespace PageFooterChunkNameSpace {
+  export type Props = ReturnType<typeof PageFooterChunk.Use>;
+}
+interface PageFooterChunkAttributes {
+  Default: () => React.JSX.Element;
+  UI: (props: PageFooterChunkNameSpace.Props) => React.JSX.Element;
+  Use: () => {};
+}
+
+export const PageFooterChunk: PageFooterChunkAttributes = {
+  Default() {
     const props = PageFooterChunk.Use();
     return <PageFooterChunk.UI {...props} />;
-  }
+  },
 
-  static UI(props: PageFooterChunk.Props) {
+  UI(props: PageFooterChunkNameSpace.Props) {
     return (
       <footer className="bg-black py-24 text-white">
-        <div className="mx-auto grid w-11/12 max-w-[1400px] grid-cols-5 items-center gap-10">
+        <div className="mx-auto grid w-11/12 max-w-[1400px] items-center gap-10 sm:grid-cols-5">
           <div className="col-span-2">
-            <Image src={IM_HeroLogo} alt="sacin.org.ng" />
+            <Image src={IM_HeroLogo} alt="sacin.org.ng" className="w-3/4" />
 
             <div className="mt-5">
               <p className="mb-1">Connect with us:</p>
@@ -34,7 +44,7 @@ export class PageFooterChunk {
               </a>
             </div>
           </div>
-          <div className="col-span-3 grid grid-cols-3">
+          <div className="grid gap-10 lg:col-span-3 lg:grid-cols-3">
             <div>
               <h6 className="mb-3 font-clash text-xl font-semibold">
                 Activities
@@ -64,13 +74,9 @@ export class PageFooterChunk {
         </div>
       </footer>
     );
-  }
+  },
 
-  static Use() {
+  Use() {
     return {};
-  }
-}
-
-export namespace PageFooterChunk {
-  export type Props = ReturnType<typeof PageFooterChunk.Use>;
-}
+  },
+};

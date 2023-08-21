@@ -1,10 +1,11 @@
+import { Event } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 
 export class HomeActivitiesChunk {
-  static Default() {
-    const props = HomeActivitiesChunk.Use();
-    return <HomeActivitiesChunk.UI {...props} />;
+  static Default(props: HomeActivitiesChunk.HookParams) {
+    const hook = HomeActivitiesChunk.Use(props);
+    return <HomeActivitiesChunk.UI {...hook} />;
   }
   static UI(props: HomeActivitiesChunk.Props) {
     return (
@@ -19,28 +20,32 @@ export class HomeActivitiesChunk {
             {props.events.map((ev, i) => (
               <div
                 key={ev.id}
-                className="flex gap-20 rounded-lg py-4 text-white"
+                className="flex grid-cols-5 gap-5 rounded-lg px-5 py-4 text-white md:gap-8 md:px-8"
                 style={{
                   backgroundColor: props.themes[i % props.themes.length],
                 }}
               >
-                <div className="flex items-center">
-                  <div className="border-r border-white px-8 py-1 text-center">
-                    <p className="font-bold leading-none"> {ev.month} </p>
-                    <h6 className="font-clash text-3xl font-bold">{ev.day}</h6>
-                  </div>
-                  <div className="px-5">
-                    <p className="font-medium">
-                      {ev.startTime} - {ev.endTime}
+                <div className="col-span-2 flex items-center justify-center">
+                  <div className="w-[35px] py-1 text-center">
+                    <p className="text-xs font-bold leading-none md:text-base">
+                      {ev.month}
                     </p>
-                    <p className="font-semibold"> {ev.location} </p>
+                    <h6 className="font-clash text-3xl font-bold">{ev.day}</h6>
                   </div>
                 </div>
 
-                <div>
-                  <h5 className="max-w-[400px] font-clash text-xl font-semibold">
+                <div className="col-span-3 border-l border-white pl-5 md:pl-8">
+                  <h5 className="max-w-[400px] font-clash font-semibold md:text-lg">
                     {ev.title}
                   </h5>
+                  <div className="mt-4 flex items-center gap-5">
+                    <p className="text-xs font-medium md:text-sm">
+                      {ev.startTime} - {ev.endTime}
+                    </p>
+                    <p className="text-xs font-semibold md:text-sm">
+                      {ev.location}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -49,68 +54,24 @@ export class HomeActivitiesChunk {
       </section>
     );
   }
-  static Use() {
+  static Use(params: HomeActivitiesChunk.HookParams) {
     const themes = ["#048147", "#D91935", "#538CD1", "#9452A1", "#F9B353"];
-    const events = [
-      {
-        id: 1,
-        day: 14,
-        month: "Jul",
-        startTime: "09:00",
-        endTime: "16:00",
-        location: "Online",
-        title: "2nd July Virtual Guest Lecture Presentation",
-      },
-      {
-        id: 2,
-        day: 15,
-        month: "Jul",
-        startTime: "10:00",
-        endTime: "15:00",
-        location: "Ikoyi, Lagos",
-        title: "2nd July Guest Lecture Presentation, Lagos Edition",
-      },
-      {
-        id: 3,
-        day: 14,
-        month: "Jul",
-        startTime: "09:00",
-        endTime: "16:00",
-        location: "Online",
-        title: "2nd July Virtual Guest Lecture Presentation",
-      },
-      {
-        id: 4,
-        day: 15,
-        month: "Jul",
-        startTime: "10:00",
-        endTime: "15:00",
-        location: "Ikoyi, Lagos",
-        title: "2nd July Guest Lecture Presentation, Lagos Edition",
-      },
-      {
-        id: 5,
-        day: 14,
-        month: "Jul",
-        startTime: "09:00",
-        endTime: "16:00",
-        location: "Online",
-        title: "2nd July Virtual Guest Lecture Presentation",
-      },
-      {
-        id: 6,
-        day: 15,
-        month: "Jul",
-        startTime: "10:00",
-        endTime: "15:00",
-        location: "Ikoyi, Lagos",
-        title: "2nd July Guest Lecture Presentation, Lagos Edition",
-      },
-    ];
+    const events = params.events.map((e) => ({
+      id: e.id,
+      day: e.day,
+      month: e.month,
+      startTime: e.startsAt,
+      endTime: e.endsAt,
+      location: e.location,
+      title: e.title,
+    }));
+
     return { events, themes };
   }
 }
 
 export namespace HomeActivitiesChunk {
+  export type HookParams = { events: Event[] };
+
   export type Props = ReturnType<typeof HomeActivitiesChunk.Use>;
 }

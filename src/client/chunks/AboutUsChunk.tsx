@@ -11,7 +11,7 @@ export class AboutUsChunk {
           <h4 className="font-clash text-4xl font-medium text-white">
             About Us
           </h4>
-          <div className="mt-14 grid grid-cols-2 gap-10">
+          <div className="mt-14 grid gap-10 sm:grid-cols-2">
             <div className="">
               <h5 className="font-clash text-2xl font-semibold text-[#5EFF48]">
                 Our Mission
