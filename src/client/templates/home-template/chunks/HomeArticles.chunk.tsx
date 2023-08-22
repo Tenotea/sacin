@@ -14,7 +14,7 @@ export class HomeArticlesChunk {
       <section>
         <div className="mx-auto w-11/12 max-w-[1400px] py-16">
           <div className="flex items-center justify-between">
-            <h2 className="font-clash text-3xl font-semibold">
+            <h2 className="font-clash text-xl font-semibold sm:text-2xl md:text-3xl">
               News and Articles
             </h2>
             <Link href="/activities">View All</Link>

@@ -33,11 +33,11 @@ function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
       />
       <div className="relative z-[1] mx-auto w-11/12 max-w-[1400px]">
         <header className="flex items-center justify-between">
-          <Link href={"/"} className="flex-shrink-0">
+          <Link href={"/"}>
             <Image
               src={IM_HeroLogo}
               alt="sacin.org.ng"
-              className="w-[50%] md:w-[300px]"
+              className="w-[65%] md:w-[300px]"
             />
           </Link>
           <nav className="hidden md:block">
@@ -52,12 +52,12 @@ function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
         </header>
 
         <div className="mt-24 md:mt-32">
-          <h1 className="max-w-5xl font-clash text-4xl font-bold capitalize leading-normal xl:text-6xl">
+          <h1 className="max-w-5xl font-clash text-3xl font-bold capitalize leading-normal md:text-6xl md:leading-normal">
             promoting the science and technology of control systems in all its
             ramifications
           </h1>
 
-          {/* <button className="rounded-md bg-[#5EFF48] px-6 py-3 font-medium text-black">
+          {/* <button className="mt-8 rounded-md bg-[#5EFF48] px-6 py-3 font-medium text-black">
             Become a Member
           </button> */}
         </div>
