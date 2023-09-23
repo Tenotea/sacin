@@ -31,4 +31,12 @@ export class AdminService {
     });
     return admin;
   }
+
+  static async GetAdminDashboardAnalytics() {
+    const adminAccounts = await prisma.admin.count();
+    const events = await prisma.event.count();
+    const contents = await prisma.content.count();
+
+    return { teamMembers: adminAccounts, events, contents };
+  }
 }

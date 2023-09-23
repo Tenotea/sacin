@@ -29,15 +29,26 @@ export default async function handler(
         }
         const cookies = new Cookies(req, res);
         cookies.set(
-          "auth-token",
-          sign({ id: admin.id }, process.env.JSWR_SCRET || ""),
+          "authorizationToken",
+          sign(
+            {
+              id: admin.id,
+              firstName: admin.firstName,
+              lastName: admin.lastName,
+              emailAddress: admin.emailAddress,
+              createdAt: admin.createdAt,
+            },
+            process.env.JSWR_SCRET || "",
+            {
+              expiresIn: "1h",
+            }
+          ),
           {
             httpOnly: true,
             sameSite: "lax",
           }
         );
 
-        // cookies().set("authorizationToken", sign({ id: admin.id }, null));
         res.json({
           message:
             "Your credentials have been authenticated! Proceeding to your dashboard",

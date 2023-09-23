@@ -53,8 +53,7 @@ model Content {
 }
 
 model Event {
-    id String @id @default(cuid())
-
+    id          String   @id @default(cuid())
     title       String
     description String
     startsAt    String

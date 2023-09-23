@@ -68,7 +68,7 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
   useEffect(() => {
     generateYearFilters();
     handleDefaultMonthValue();
-  }, []);
+  }, [router.asPath]);
 
   useEffect(() => {
     const searchParam = new URLSearchParams();
@@ -126,7 +126,7 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
             </div>
             <div className="w-[60%]">
               <SelectBox
-                placeholder="Month"
+                placeholder="All"
                 name={filterFormData.fieldNames.month}
                 onChange={filterFormData.handleChange}
                 options={[

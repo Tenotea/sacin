@@ -1,4 +1,6 @@
 import { Icon } from "@iconify/react";
+import Cookies from "cookies";
+import { NextPageContext } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -101,4 +103,18 @@ export default function AdminPage() {
       </Link>
     </main>
   );
+}
+
+export function getServerSideProps({ req, res }: NextPageContext) {
+  const cookies = new Cookies(req!, res!);
+  const authorizationToken = cookies.get("authorizationToken");
+
+  if (authorizationToken) {
+    res!.setHeader("location", "/_console/admin/dashboard");
+    res!.statusCode = 302;
+    res!.end();
+    return;
+  }
+
+  return { props: {} };
 }
