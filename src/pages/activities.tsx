@@ -166,14 +166,10 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
 export const getServerSideProps = async function ({ query }: NextPageContext) {
   try {
     let events = {} as Record<Month, Event[]>;
-    if (query.year || query.month) {
-      events = await EventsService.GetEventsByMonthAndYear({
-        month: query.month?.toString() || "",
-        year: query.year?.toString() || "",
-      });
-    } else {
-      events = await EventsService.GetEventsGroupByMonthsForLanding();
-    }
+    events = await EventsService.GetEventsByMonthAndYear({
+      month: query.month?.toString() || "",
+      year: query.year?.toString() || "",
+    });
 
     return { props: { events } };
   } catch (error) {

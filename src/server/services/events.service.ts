@@ -53,8 +53,16 @@ export class EventsService {
     return event;
   }
 
-  static async GetMostRecentEvents() {
+  static async GetUpcomingEvents() {
+    const months = Object.values(Month);
+    const currentMonth = new Date().getMonth();
+    // console.log(months, currentMonth);
+    // console.log(months.filter((m, i) => {
+    //   let currentMonth = 10
+    //   if (currentMonth)
+    // }));
     const events = await prisma.event.findMany({
+      where: { month: { in: months.filter((m, i) => i >= currentMonth) } },
       orderBy: { month: "asc" },
       take: 5,
     });

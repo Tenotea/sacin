@@ -13,7 +13,7 @@ export interface UseFormParams<T> {
   onSubmit?: (formData: T) => Promise<void>;
 }
 
-export function useForm<T>(params: UseFormParams<T>) {
+export function useForm<T extends object>(params: UseFormParams<T>) {
   const form = useFormData(params.initialFormData);
   const [validationError, setValidationError] = useState<string | null>(null);
 

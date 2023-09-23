@@ -26,7 +26,7 @@ export default function Home(
 export const getServerSideProps: GetServerSideProps<EventsService.GetMostRecentEventsDAO> =
   async function () {
     try {
-      let events = await EventsService.GetMostRecentEvents();
+      let events = await EventsService.GetUpcomingEvents();
       events = events.map((e) => ({
         ...e,
         updatedAt: e.updatedAt.toISOString() as unknown as Date,
