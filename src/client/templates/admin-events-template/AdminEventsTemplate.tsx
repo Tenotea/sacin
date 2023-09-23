@@ -33,7 +33,12 @@ export default function AdminEventsTemplate() {
                     autoComplete="off"
                     required
                     value={formData.title}
-                    onChange={handleChange}
+                    onChange={(payload) =>
+                      handleChange({
+                        field: "title",
+                        value: payload.currentTarget.value,
+                      })
+                    }
                     className="block flex-1 border-0 bg-transparent px-3 py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -53,7 +58,12 @@ export default function AdminEventsTemplate() {
                   name="about"
                   rows={3}
                   value={formData.about}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "about",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -121,7 +131,12 @@ export default function AdminEventsTemplate() {
                 id="location"
                 autoComplete="off"
                 value={formData.location}
-                onChange={handleChange}
+                onChange={(e) =>
+                  handleChange({
+                    field: "location",
+                    value: e.currentTarget.value,
+                  })
+                }
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -141,7 +156,12 @@ export default function AdminEventsTemplate() {
                   name="startTime"
                   id="start-time"
                   value={formData.startTime}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "startTime",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                   autoComplete="off"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -161,7 +181,12 @@ export default function AdminEventsTemplate() {
                   name="endTime"
                   id="end-time"
                   value={formData.endTime}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "endTime",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                   autoComplete="off"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -220,7 +245,12 @@ export default function AdminEventsTemplate() {
                   id="day"
                   required
                   value={formData.day}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "day",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   <option value={""} disabled>
@@ -248,7 +278,12 @@ export default function AdminEventsTemplate() {
                   id="month"
                   required
                   value={formData.month}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "month",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   <option value={""} disabled>
@@ -278,7 +313,12 @@ export default function AdminEventsTemplate() {
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={formData.year}
-                  onChange={handleChange}
+                  onChange={(payload) =>
+                    handleChange({
+                      field: "year",
+                      value: payload.currentTarget.value,
+                    })
+                  }
                 >
                   <option value={""} disabled>
                     Click to select

@@ -1,17 +1,59 @@
-import { ChangeEvent, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
+import { InputChangePayload } from "../types/types.util";
 
-export default function useFormData<T>(initialState: T) {
-  function reducer(
-    state: T,
-    payload: ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) {
+type NamesTypeMap<T> = {
+  [P in keyof T]: P;
+};
+
+type PropertiesOf<T> = {
+  [P in keyof T]: T[P];
+};
+
+export default function useFormData<T extends object>(initialState: T) {
+  const [fieldNames, setFieldNames] = useState(
+    {} as unknown as NamesTypeMap<T>
+  );
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  function reducer(state: T, payload: InputChangePayload) {
     return {
       ...state,
-      [payload.target.name]: payload.target.value,
+      [payload.field]: payload.value,
     } as T;
   }
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return { formData: state, handleChange: dispatch };
+
+  function reset() {
+    Object.keys(initialState).forEach((k) =>
+      dispatch({
+        field: k,
+        value: "",
+      })
+    );
+  }
+
+  function setValues(payload: Partial<PropertiesOf<T>>) {
+    Object.keys(initialState).map((k) => {
+      dispatch({
+        field: k,
+        value:
+          (payload as Record<string, string>)[k] ||
+          (state as Record<string, string>)[k] ||
+          "",
+      });
+    });
+  }
+
+  useEffect(() => {
+    const _n: Record<string, string> = {};
+    Object.keys(initialState).forEach((k) => (_n[k] = k));
+    setFieldNames(_n as unknown as NamesTypeMap<T>);
+  }, []);
+
+  return {
+    resetFormData: reset,
+    formData: state,
+    handleChange: dispatch,
+    fieldNames,
+    setFields: setValues,
+  };
 }

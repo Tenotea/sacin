@@ -6,7 +6,7 @@ export class AboutUsChunk {
 
   static UI(props: AboutUsChunk.Props) {
     return (
-      <section className="bg-[#062602] py-24">
+      <section id="about-us" className="bg-[#062602] py-24">
         <div className="mx-auto w-11/12 max-w-[1400px]">
           <h4 className="font-clash text-4xl font-medium text-white">
             About Us

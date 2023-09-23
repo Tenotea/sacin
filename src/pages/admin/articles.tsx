@@ -1,7 +1,11 @@
 import React from "react";
 import DashboardLayout from "~/client/layouts/DashboardLayout";
-import DashboardTemplate from "~/client/templates/dashboard-template/DashboardTemplate";
+import AdminArticlesTemplate from "~/client/templates/admin-articles-template/AdminArticlesTemplate";
 
 export default function admin() {
-  return <DashboardLayout title="Articles">Articles</DashboardLayout>;
+  return (
+    <DashboardLayout title="Articles">
+      <AdminArticlesTemplate />
+    </DashboardLayout>
+  );
 }

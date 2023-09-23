@@ -1,3 +1,5 @@
+import { Month } from "@prisma/client";
+
 export function getDateFromISOString(time?: string) {
   const timeString = time ? new Date(time) : new Date();
 
@@ -50,4 +52,50 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 
   return debouncedFunc as T & { cancel: () => void };
+}
+
+export function getFullMonthFromMonthCode(month: Month) {
+  let fullMonth = "";
+  switch (month) {
+    case "APR":
+      fullMonth = "April";
+      break;
+    case "AUG":
+      fullMonth = "August";
+      break;
+    case "DEC":
+      fullMonth = "December";
+      break;
+    case "FEB":
+      fullMonth = "February";
+      break;
+    case "JAN":
+      fullMonth = "January";
+      break;
+    case "JUL":
+      fullMonth = "July";
+      break;
+    case "JUN":
+      fullMonth = "June";
+      break;
+    case "MAR":
+      fullMonth = "March";
+      break;
+    case "MAY":
+      fullMonth = "May";
+      break;
+    case "NOV":
+      fullMonth = "November";
+      break;
+    case "OCT":
+      fullMonth = "October";
+      break;
+    case "SEP":
+      fullMonth = "September";
+      break;
+    default:
+      fullMonth = month;
+      break;
+  }
+  return fullMonth;
 }
