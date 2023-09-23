@@ -1,7 +1,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import useFormData from "./useFormData";
-import { ZodSchema, ZodType } from "zod";
+import { ZodError, ZodObject, ZodType } from "zod";
 
 export type ZRawShapeOf<T> = {
   [property in keyof T]: ZodType<T[property]>;
@@ -9,7 +9,7 @@ export type ZRawShapeOf<T> = {
 
 export interface UseFormParams<T> {
   initialFormData: T;
-  schema?: ZodSchema;
+  validationSchema?: ZodObject<ZRawShapeOf<T>>;
   onSubmit?: (formData: T) => Promise<void>;
 }
 
@@ -20,15 +20,15 @@ export function useForm<T extends object>(params: UseFormParams<T>) {
   async function handleSubmit(e?: FormEvent) {
     try {
       if (e != null) e.preventDefault();
-      if (params.schema != null) {
+      if (params.validationSchema != null) {
         setValidationError(null);
-        await params.schema.parse(form.formData);
+        await params.validationSchema.parseAsync(form.formData);
       }
       if (params.onSubmit != null) {
         await params.onSubmit(form.formData);
       }
     } catch (error: unknown) {
-      setValidationError((error as Error).message);
+      setValidationError((error as ZodError).message);
     }
   }
 
@@ -36,6 +36,6 @@ export function useForm<T extends object>(params: UseFormParams<T>) {
     ...form,
     handleSubmit,
     validationError,
-    schema: params.schema,
+    validationSchema: params.validationSchema?.shape,
   };
 }

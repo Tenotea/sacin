@@ -35,8 +35,8 @@ model Admin {
     id           String   @id @default(cuid())
     firstName    String
     lastName     String
-    emailAddress String
-    password     String
+    emailAddress String   @unique
+    password     String   @db.Text
     updatedAt    DateTime @updatedAt
     createdAt    DateTime @default(now())
 }

@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "migrate:dev": "prisma migrate dev --name migration",
     "postinstall": "prisma migrate deploy && prisma generate",
     "lint": "next lint",
     "start": "next start"
@@ -16,8 +17,12 @@
     "@prisma/client": "^5.0.0",
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tailwindcss/forms": "^0.5.4",
+    "@types/bcryptjs": "^2.4.4",
     "axios": "^1.4.0",
+    "bcryptjs": "^2.4.3",
+    "cookies": "^0.8.0",
     "draft-js": "^0.11.7",
+    "jsonwebtoken": "^9.0.2",
     "next": "^13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -30,8 +35,10 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
+    "@types/cookies": "^0.7.8",
     "@types/draft-js": "^0.11.12",
     "@types/eslint": "^8.37.0",
+    "@types/jsonwebtoken": "^9.0.3",
     "@types/node": "^18.16.0",
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.2.6",
