@@ -54,6 +54,7 @@ model Content {
 
 model Event {
     id          String   @id @default(cuid())
+    code        String?  @unique
     title       String
     description String
     startsAt    String

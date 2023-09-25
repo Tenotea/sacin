@@ -9,3 +9,13 @@ export const dashboardNavigation = [
   { name: "Members", href: "/_console/admin/members", current: false },
   { name: "Team", href: "/_console/admin/team", current: false },
 ];
+
+export function getPlatformEventYears() {
+  const _y = [];
+  const currentYear = new Date().getFullYear();
+
+  for (let i = 2023; i <= currentYear + 2; i++) {
+    _y.push({ id: i.toString(), name: i.toString() });
+  }
+  return _y;
+}

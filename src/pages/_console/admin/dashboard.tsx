@@ -3,6 +3,7 @@ import { Admin } from "@prisma/client";
 import Cookies from "cookies";
 import { decode } from "jsonwebtoken";
 import { NextPageContext } from "next";
+import Link from "next/link";
 import React from "react";
 import DashboardLayout from "~/client/layouts/DashboardLayout";
 import { AdminService } from "~/server/services/admin.service";
@@ -25,6 +26,7 @@ export default function admin(props: {
           />
         </>
       }
+      user={props.user}
       subtitle={"Here are your stats for the day"}
     >
       <section className=" grid grid-cols-5 gap-6">
@@ -61,9 +63,11 @@ export default function admin(props: {
               </li>
             </ul>
 
-            <button className="mt-6 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white">
-              Create a new event
-            </button>
+            <Link href={"/_console/admin/events/create"}>
+              <button className="mt-6 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white">
+                Create a new event
+              </button>
+            </Link>
           </div>
         </div>
         <div className="col-span-3 grid grid-cols-2 gap-5 rounded-lg border bg-white py-5">

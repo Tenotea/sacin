@@ -24,6 +24,17 @@ export class EventsService {
     return eventGroups;
   }
 
+  static async GetAllEvents() {
+    const events = await prisma.event.findMany({
+      orderBy: [{ year: "asc" }, { month: "asc" }],
+    });
+    return events.map((ev) => ({
+      ...ev,
+      updatedAt: ev.updatedAt.toISOString() as unknown as Date,
+      createdAt: ev.createdAt.toISOString() as unknown as Date,
+    }));
+  }
+
   static async CreateNewEvent(req: NextApiRequest, res: NextApiResponse) {
     await z
       .object({
