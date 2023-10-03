@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 
 export type BaseTableProps = {
+  handleRowClick?: (id: string) => void;
   headers: { id: string; name: ReactNode }[];
   data: Array<Record<string, ReactNode>>;
 };
@@ -28,8 +29,13 @@ export default function BaseTable(props: BaseTableProps) {
           >
             {props.headers.map((header) => (
               <td
+                onClick={() =>
+                  row.discreetId &&
+                  props.handleRowClick &&
+                  props.handleRowClick(row.discreetId.toString())
+                }
                 key={header.id}
-                className="py-3 pl-5 text-xs font-normal text-[#4d4d4d] first:border-r last:border-r-0 last:pr-5"
+                className="py-3 pl-5 text-sm font-normal text-[#4d4d4d] first:border-r last:border-r-0 last:pr-5"
               >
                 {row[header.id]}
               </td>

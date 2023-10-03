@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   IM_HeroBackground,
   IM_HeroLogo,
@@ -53,10 +53,11 @@ function HomeHeroChunkUI(props: HomeHeroChunk.Props) {
 
         <div className="mt-24 md:mt-32">
           <h1 className="max-w-5xl font-clash text-3xl font-bold capitalize leading-normal md:text-6xl md:leading-normal">
-            promoting the science and technology of control systems in all its
-            ramifications
+            {props.title ??
+              "promoting the science and technology of control systems in all its ramifications"}
           </h1>
 
+          <p>{props.subtitle}</p>
           {/* <button className="mt-8 rounded-md bg-[#5EFF48] px-6 py-3 font-medium text-black">
             Become a Member
           </button> */}
@@ -71,5 +72,8 @@ export const HomeHeroChunk = {
   use: useHomeHeroChunk,
 };
 export namespace HomeHeroChunk {
-  export type Props = ReturnType<typeof useHomeHeroChunk> & {};
+  export type Props = ReturnType<typeof useHomeHeroChunk> & {
+    title?: ReactNode;
+    subtitle?: ReactNode;
+  };
 }

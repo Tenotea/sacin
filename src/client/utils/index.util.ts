@@ -19,3 +19,10 @@ export function getPlatformEventYears() {
   }
   return _y;
 }
+
+export function createSlugFromString(title: string) {
+  const slug = title.toLowerCase().replace(/\s+/g, "-");
+  const cleanSlug = slug.replace(/[^a-z0-9-]/g, "");
+  const finalSlug = cleanSlug.replace(/-{2,}/g, "");
+  return finalSlug.replace(/^-+|-+$/g, "");
+}

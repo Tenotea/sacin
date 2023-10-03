@@ -15,6 +15,13 @@ class EventsClient extends HttpService {
       body: dto,
     });
   }
+
+  async RegisterForEvent() {
+    return this.SendRequest({
+      method: "post",
+      path: "/",
+    });
+  }
 }
 
 export const eventsClient = new EventsClient();

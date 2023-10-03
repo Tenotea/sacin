@@ -3,6 +3,8 @@ import { Admin, Event, Month } from "@prisma/client";
 import Cookies from "cookies";
 import { decode } from "jsonwebtoken";
 import { NextPageContext } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import BaseTable from "~/client/components/base-table/BaseTable";
 import SelectBox from "~/client/components/select-box/SelectBox";
@@ -20,9 +22,11 @@ export default function index(props: {
   user: Admin;
   events: Event[];
   analytics: Awaited<
-    ReturnType<typeof AdminService.GetAdminDashboardAnalytics>
+    ReturnType<typeof AdminService.GetEventsDashboardAnalytics>
   >;
+  upcomingEvents: number;
 }) {
+  const router = useRouter();
   const years = getPlatformEventYears();
   const [events, setEvents] = useState(props.events.slice());
   const searchFormData = useFormData({
@@ -83,7 +87,7 @@ export default function index(props: {
                   width={18}
                   className="text-gray-400"
                 />
-                13 Upcoming Events
+                {props.upcomingEvents} Upcoming Events
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Icon
@@ -91,13 +95,15 @@ export default function index(props: {
                   width={18}
                   className="text-gray-400"
                 />
-                24 Completed Events
+                {props.events.length - props.upcomingEvents} Completed Events
               </li>
             </ul>
 
-            <button className="mt-6 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white">
-              Create a new event
-            </button>
+            <Link href={"/_console/admin/events/create"}>
+              <button className="mt-6 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white">
+                Create a new event
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -112,7 +118,7 @@ export default function index(props: {
                 className="mt-0.5 text-gray-400"
                 width={30}
               />
-              <p>138</p>
+              <p>{props.analytics.participants.toLocaleString()}</p>
             </div>
 
             <ul className="mt-5 grid gap-2">
@@ -122,7 +128,7 @@ export default function index(props: {
                   width={18}
                   className="text-gray-400"
                 />
-                104 Accepted Invitations
+                0 Accepted Invitations
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Icon
@@ -130,7 +136,7 @@ export default function index(props: {
                   width={18}
                   className="text-gray-400"
                 />
-                14 Awaiting Response
+                2 Awaiting Response
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Icon
@@ -138,13 +144,9 @@ export default function index(props: {
                   width={18}
                   className="text-gray-400"
                 />
-                20 Declined Invitations
+                0 Declined Invitations
               </li>
             </ul>
-
-            <button className="mt-6 rounded-md border border-green-600 px-4 py-2 text-sm font-medium text-green-600">
-              Start a new draft
-            </button>
           </div>
         </div>
       </section>
@@ -203,20 +205,27 @@ export default function index(props: {
         <section className="border-x">
           <div className="w-full overflow-auto">
             <BaseTable
+              handleRowClick={(id) => {
+                console.log(id);
+                router.push(`/_console/admin/events/${id}`);
+              }}
               headers={[
                 { id: "id", name: "ID" },
                 { id: "title", name: "Title" },
                 { id: "date", name: "Date" },
                 { id: "time", name: "Time" },
+                { id: "participants", name: "Participants" },
                 { id: "createdAt", name: "Created At" },
                 { id: "action", name: "" },
               ]}
               data={events.map((event, i) => ({
                 id: `#${i + 1}`,
+                discreetId: event.id,
                 title: event.title,
                 date: `${event.day} ${getFullMonthFromMonthCode(event.month)} ${
                   event.year
                 }`,
+                participants: (event as any)._count.registrations,
                 time: `${event.startsAt} - ${event.endsAt}`,
                 createdAt: (
                   <div>
@@ -253,8 +262,27 @@ export async function getServerSideProps({ req, res }: NextPageContext) {
     res!.end();
     return;
   }
+
   const user = decode(authorizationToken, { json: true });
   const events = await EventsService.GetAllEvents();
-  const analytics = await AdminService.GetAdminDashboardAnalytics();
-  return { props: { user, events, analytics } };
+
+  const months = Object.values(Month);
+  const getMonthIndex = (month: Month) => months.findIndex((m) => m === month);
+
+  const currentDate = new Date().getDate();
+  const currentMonth = new Date().getMonth() - 1;
+  const currentYear = new Date().getFullYear();
+
+  const upComingEvents = events.filter((ev) => {
+    return (
+      (Number(ev.day) >= currentDate &&
+        getMonthIndex(ev.month) > currentMonth) ||
+      Number(ev.year) > currentYear
+    );
+  });
+
+  const analytics = await AdminService.GetEventsDashboardAnalytics();
+  return {
+    props: { user, events, analytics, upcomingEvents: upComingEvents.length },
+  };
 }

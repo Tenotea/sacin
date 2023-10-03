@@ -170,7 +170,6 @@ export const getServerSideProps = async function ({ query }: NextPageContext) {
       month: query.month?.toString() || "",
       year: query.year?.toString() || "",
     });
-
     return { props: { events } };
   } catch (error) {
     return { props: { events: {} } };

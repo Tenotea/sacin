@@ -17,7 +17,7 @@ export default function DashboardLayout(props: DashboardLayoutProps) {
   const router = useRouter();
   return (
     <main className="relative flex items-start">
-      <aside className="sticky top-0 flex h-screen w-[250px] flex-col border-r pb-5">
+      <aside className="sticky top-0 flex h-screen w-[250px] flex-shrink-0 flex-col border-r pb-5">
         <div className="border-b px-5 py-3">
           <Link href={"/"}>
             <Image src={IM_HeroLogo} alt="sacin.org.ng" className="w-[150px]" />

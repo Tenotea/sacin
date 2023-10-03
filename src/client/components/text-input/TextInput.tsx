@@ -27,8 +27,8 @@ export function TextInput(props: TextInputProps): JSX.Element {
         <input
           {...inputProps}
           className={`${
-            validationError == null ? "border-gray-50" : "border-red-300"
-          } block h-[48px] w-full text-ellipsis rounded border bg-[#FAFAFA] pl-4 pr-[30px] text-sm outline-none focus:border-green-400 focus:ring-0 disabled:cursor-not-allowed disabled:bg-[#e7e7e7] disabled:opacity-70`}
+            validationError == null ? "border-gray-200" : "border-red-300"
+          } block h-[48px] w-full text-ellipsis rounded border bg-[#FAFAFA] pl-4 pr-[30px] text-sm outline-none transition-colors focus:border-gray-300 focus:ring-0 disabled:cursor-not-allowed disabled:bg-[#e7e7e7] disabled:opacity-70`}
           type={inputType}
           onChange={handleChange}
           placeholder={props.label}

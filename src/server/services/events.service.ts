@@ -27,6 +27,9 @@ export class EventsService {
   static async GetAllEvents() {
     const events = await prisma.event.findMany({
       orderBy: [{ year: "asc" }, { month: "asc" }],
+      include: {
+        _count: { select: { registrations: true } },
+      },
     });
     return events.map((ev) => ({
       ...ev,
@@ -84,8 +87,9 @@ export class EventsService {
   static async GetEventsGroupByMonthsForLanding() {
     // This method fetches for the activities landing page. hence,
     // it only fetches data for the current year;
+    const data = new Date().getFullYear();
     const events = await prisma.event.findMany({
-      where: { year: "2023" },
+      where: { year: data.toString() },
       orderBy: { month: "asc" },
     });
     return this.CreateEventGroups(events);
@@ -101,6 +105,24 @@ export class EventsService {
       orderBy: { month: "asc" },
     });
     return this.CreateEventGroups(events);
+  }
+
+  static async GetEventById(params: { id: string }) {
+    const event = await prisma.event.findFirstOrThrow({
+      where: { id: params.id },
+    });
+    event.createdAt = event.createdAt.toISOString() as any;
+    event.updatedAt = event.updatedAt.toISOString() as any;
+    return event;
+  }
+
+  static async GetClientEventById(params: { id: string }) {
+    const event = await prisma.event.findFirstOrThrow({
+      where: { id: params.id },
+    });
+    event.createdAt = event.createdAt.toISOString() as any;
+    event.updatedAt = event.updatedAt.toISOString() as any;
+    return event;
   }
 }
 

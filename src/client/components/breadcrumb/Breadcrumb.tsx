@@ -8,9 +8,12 @@ type BreadcrumbProps = {
 
 export default function Breadcrumb(props: BreadcrumbProps) {
   return (
-    <ul className="flex items-center gap-1">
+    <ul className="flex items-center gap-1 overflow-auto">
       {props.paths.map((path, i) => (
-        <li key={path.path} className="flex items-center gap-1">
+        <li
+          key={path.path}
+          className="flex items-center gap-1 whitespace-nowrap"
+        >
           <Link
             href={path.path}
             className={

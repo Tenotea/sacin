@@ -39,4 +39,24 @@ export class AdminService {
 
     return { teamMembers: adminAccounts, events, contents };
   }
+
+  static async GetEventsDashboardAnalytics() {
+    const events = await prisma.event.count();
+    const participants = await prisma.eventRegistration.count();
+
+    return { events, participants };
+  }
+
+  static async GetEventAnalytics(dto: { eventId: string }) {
+    const participants = await prisma.eventRegistration.findMany({
+      where: { eventId: dto.eventId },
+    });
+    console.log(participants);
+
+    return participants.map((participant) => ({
+      ...participant,
+      createdAt: participant.createdAt.toISOString() as any,
+      updatedAt: participant.updatedAt.toISOString() as any,
+    }));
+  }
 }
