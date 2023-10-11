@@ -14,7 +14,7 @@ export default function Home(
         </title>
         <meta
           name="description"
-          content="promoting the science and technology of control systems in all its ramifications"
+          content="To promote the science and technology of automation, control and instrumentation through organization of seminars, technical meetings, publications and others means in line with the objectives of SACIN"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

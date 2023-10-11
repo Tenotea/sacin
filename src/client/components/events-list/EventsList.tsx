@@ -3,6 +3,7 @@ import { Event } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 import { createSlugFromString } from "~/client/utils/index.util";
+import EventFeedback from "../event-feedback/EventFeedback";
 
 type EventsListProps = {
   events: Event[];
@@ -10,6 +11,9 @@ type EventsListProps = {
 
 export default function EventsList(props: EventsListProps) {
   const themes = ["#048147", "#D91935", "#538CD1", "#9452A1", "#F9B353"];
+  if (props.events.length === 0) {
+    return <EventFeedback />;
+  }
   return (
     <div className="grid gap-5">
       {props.events.map((ev, i) => (

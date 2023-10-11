@@ -13,6 +13,7 @@ import { getFullMonthFromMonthCode } from "~/client/utils/functions";
 import useFormData from "~/client/utils/hooks/useFormData";
 import { EventsService } from "~/server/services/events.service";
 import { NextPageContext } from "next";
+import EventFeedback from "~/client/components/event-feedback/EventFeedback";
 
 type ActivitiesPageProps = {
   events?: EventsService.GetEventsGroupByMonthsDAO;
@@ -97,11 +98,6 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
           Activities | SACIN - Society for Automation Control and
           Instrumentation of Nigeria
         </title>
-        <meta
-          name="description"
-          content="promoting the science and technology of control systems in all its ramifications"
-        />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeHeroChunk.UI {...homeHeroChunk} />
       <section className="mx-auto mb-14 mt-8 flex w-11/12 max-w-[1400px] flex-col flex-wrap justify-between gap-6 sm:mt-14 sm:flex-row sm:items-center">
@@ -144,6 +140,15 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
           </div>
         </div>
       </section>
+
+      {Object.keys(props.events || {}).length === 0 && (
+        <EventFeedback
+          message={`There are no events for the month of ${getFullMonthFromMonthCode(
+            filterFormData.formData.month as Month
+          )}`}
+        />
+      )}
+
       {props.events && (
         <div className="mx-auto mb-24 grid w-11/12 max-w-[1400px] gap-14 md:gap-20">
           {Object.keys(props.events).map((month) => (
@@ -157,6 +162,7 @@ export default function ActivitiesPage(props: ActivitiesPageProps) {
           ))}
         </div>
       )}
+
       <AboutUsChunk.UI />
       <PageFooterChunk.UI />
     </>

@@ -70,11 +70,6 @@ export default function ActivityPage(props: ActivityPageProps) {
           {props.event.title} | SACIN - Society for Automation Control and
           Instrumentation of Nigeria
         </title>
-        <meta
-          name="description"
-          content="promoting the science and technology of control systems in all its ramifications"
-        />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeHeroChunk.UI
         {...homeHeroChunk}
