@@ -17,28 +17,27 @@ export class HomeArticlesChunk {
             <h2 className="font-clash text-xl font-semibold sm:text-2xl md:text-3xl">
               News and Articles
             </h2>
-            <Link href="/activities">View All</Link>
+            {/* <Link href="/activities">View All</Link> */}
           </div>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {props.articles.map((ar) => (
-              <div key={ar.id} className="relative border px-8 py-14">
+              <Link
+                href={ar.link}
+                key={ar.id}
+                className="relative border px-8 py-14"
+              >
                 <img
                   src={IM_ArticleCardBackground.default.src}
                   alt=""
                   className="absolute left-0 top-0 -z-[1] h-full w-full object-cover"
                 />
-                <h6 className="text-xl font-bold">{ar.name}</h6>
+                <h6 className="text-xl font-semibold">{ar.name}</h6>
                 <p className="mt-6 text-gray-600">{ar.description}</p>
-                <Link
-                  href={
-                    "/news/2022-04-20/keynote-speech-ifac-world-congress-2023-yokohama-japan"
-                  }
-                  className="text-medium ml-auto mt-5 block max-w-max font-clash text-sm underline"
-                >
+                <span className="text-medium ml-auto mt-5 block max-w-max font-clash text-sm underline">
                   Read more
-                </Link>
-              </div>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
@@ -50,40 +49,25 @@ export class HomeArticlesChunk {
     const articles = [
       {
         id: 1,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
+        name: "Nigeria stands to gain a lot by developing expertise in control systems —Ogunba",
+        link: "https://tribuneonlineng.com/nigeria-stands-to-gain-a-lot-by-developing-expertise-in-control-systems-ogunba/",
         description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
+          "Control, in simple terms, is about making things happen to satisfaction. Every aspect of life as we know it is achieved because...",
       },
-      {
-        id: 2,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
-        description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
-      },
-      {
-        id: 3,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
-        description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
-      },
-      {
-        id: 4,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
-        description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
-      },
-      {
-        id: 5,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
-        description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
-      },
-      {
-        id: 6,
-        name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
-        description:
-          "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
-      },
+      // {
+      //   id: 2,
+      //   name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
+      //   link: "",
+      //   description:
+      //     "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
+      // },
+      // {
+      //   id: 3,
+      //   name: "KEYNOTE SPEECH: IFAC World Congress 2023,Yokohama, JAPAN",
+      //   link: "",
+      //   description:
+      //     "The idea is to form an orchestra ensemble including only musicians from the automatic control community...",
+      // },
     ];
     return { articles };
   }
