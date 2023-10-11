@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { IM_HeroLogo } from "../assets/images";
 import React from "react";
+import Link from "next/link";
 
 export namespace PageFooterChunkNameSpace {
   export type Props = ReturnType<typeof PageFooterChunk.Use>;
@@ -37,10 +38,10 @@ export const PageFooterChunk: PageFooterChunkAttributes = {
             <div className="mt-8">
               <p className="">or send us an email at:</p>
               <a
-                href="mailto:secretary@sacin.org.ng"
+                href="mailto:info@sacin.org.ng"
                 className="-mt-2 block max-w-max text-lg font-semibold text-[#5EFF48]"
               >
-                support@sacin.org.ng
+                info@sacin.org.ng
               </a>
             </div>
           </div>
@@ -49,26 +50,41 @@ export const PageFooterChunk: PageFooterChunkAttributes = {
               <h6 className="mb-3 font-clash text-xl font-semibold">
                 Activities
               </h6>
-              <p className="mb-1 opacity-80">Past Activities</p>
-              <p className="mb-1 opacity-80">Upcoming Activities</p>
-              <p className="mb-1 opacity-80">Participation Guide</p>
+              <Link href={"/activities"} className="block max-w-max">
+                <p className="mb-1 opacity-80">Upcoming Activities</p>
+              </Link>
+              <Link href={"#"} className="block max-w-max">
+                <p className="mb-1 opacity-80">Participation Guide</p>
+              </Link>
             </div>
             <div>
               <h6 className="mb-3 font-clash text-xl font-semibold">
                 Publications
               </h6>
-              <p className="mb-1 opacity-80">News</p>
-              <p className="mb-1 opacity-80">Articles</p>
-              <p className="mb-1 opacity-80">Research Papers</p>
+              <Link href={"#"} className="block max-w-max">
+                <p className="mb-1 opacity-80">News</p>
+              </Link>
+              <Link href={"#"} className="block max-w-max">
+                <p className="mb-1 opacity-80">Articles</p>
+              </Link>
+              <Link href={"#"} className="block max-w-max">
+                <p className="mb-1 opacity-80">Research Papers</p>
+              </Link>
             </div>
             <div>
-              <h6 className="mb-3 font-clash text-xl font-semibold">
-                About us
-              </h6>
-              <h6 className="mb-3 font-clash text-xl font-semibold">Login</h6>
-              <h6 className="mb-3 font-clash text-xl font-semibold">
-                Become a Member
-              </h6>
+              <Link href={"#about-us"} className="block max-w-max">
+                <h6 className="mb-3 font-clash text-xl font-semibold">
+                  About us
+                </h6>
+              </Link>
+              <Link href={"#"} className="block max-w-max">
+                <h6 className="mb-3 font-clash text-xl font-semibold">Login</h6>
+              </Link>
+              <Link href={"#"} className="block max-w-max">
+                <h6 className="mb-3 font-clash text-xl font-semibold">
+                  Become a Member
+                </h6>
+              </Link>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ import Link from "next/link";
 function useHomeHeroChunk() {
   const navigationItems = [
     { id: 1, name: "Activities", path: "/activities" },
-    { id: 2, name: "News", path: "/news" },
+    // { id: 2, name: "News", path: "/news" },
     { id: 3, name: "About us", path: "#about-us" },
     { id: 4, name: "Contact us", path: "#contact-us" },
   ];
